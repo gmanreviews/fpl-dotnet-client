@@ -11,6 +11,15 @@ public class Client(IHttpClientFactory clientFactory)
         var response = await client.GetAsync("api/gameweeks");
         response.EnsureSuccessStatusCode();
         var stringResp = await response.Content.ReadAsStringAsync();
+        try
+        {
+            var o =  JsonSerializer.Deserialize<List<Gameweek>>(stringResp);
+        }
+        catch (Exception e)
+        {
+            _ = e.Message;
+            //do nothing for now
+        }
         return Enumerable.Empty<Gameweek>().ToList(); 
         //JsonSerializer.Deserialize<dynamic>(stringResp) ?? Enumerable.Empty<Gameweek>().ToList();
     }
