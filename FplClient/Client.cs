@@ -11,7 +11,7 @@ public partial class Client(IHttpClientFactory clientFactory)
     public async Task<Gameweek[]> Gameweeks(CancellationToken cancellationToken = default)
     {
         using var client = ConfigureClient();
-        var response = await client.GetAsync("api/gameweeks" ,cancellationToken);
+        var response = await client.GetAsync("api/fixtures" ,cancellationToken);
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync(cancellationToken);
         var decodedString = DecodeUniCode(responseString).Replace(@"\r\n", string.Empty);

@@ -6,18 +6,18 @@ namespace FplClientModels;
 public class Gameweek
 {
     [JsonPropertyName("code")]
-    public long Code;
+    public long Code {get; set;}
     [JsonPropertyName("event")]
-    public int Event;
+    public int Event {get; set;}
     [JsonPropertyName("finished")]
-    public bool Finished;
+    public bool Finished {get; set;}
     [JsonPropertyName("finished_provisional")]
-    public bool FinishedProvisionally;
+    public bool FinishedProvisionally {get; set;}
     [JsonPropertyName("id")]
-    public long Id;
+    public long Id {get; set;}
     [JsonPropertyName("kickoff_time")]
-    public DateTimeOffset KickoffTime;
+    public DateTimeOffset KickoffTime {get; set;}
     [JsonPropertyName("minutes")]
-    public int Minutes;
+    public int Minutes {get; set;}
     
 }
