@@ -5,21 +5,13 @@ namespace FplClient;
 
 public class Client(IHttpClientFactory clientFactory)
 {
-    public async Task<Gameweek[]> Gameweeks(CancellationToken cancellationToken = default)
+    public async Task<Gameweek[]> Gameweeks(CancellationToken cancellationToken)
     {
         using var client = ConfigureClient();
         var response = await client.GetAsync("api/fixtures" ,cancellationToken);
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync(cancellationToken);
-        try
-        {
-            return JsonSerializer.Deserialize<Gameweek[]>(responseString) ?? [];
-        } 
-        catch (Exception e)
-        {
-            _ = e.Message;
-        }
-        return [];
+        return JsonSerializer.Deserialize<Gameweek[]>(responseString) ?? [];
     }
 
     private HttpClient ConfigureClient()

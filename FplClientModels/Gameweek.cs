@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 namespace FplClientModels;
 
-//[JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
-
+[UsedImplicitly]
 public class Gameweek
 {
     [JsonPropertyName("code")]
@@ -20,5 +20,4 @@ public class Gameweek
     public DateTimeOffset KickoffTime {get; set;}
     [JsonPropertyName("minutes")]
     public int Minutes {get; set;}
-    
 }
