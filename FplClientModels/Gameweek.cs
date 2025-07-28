@@ -2,7 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace FplClientModels;
 
-[JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
+//[JsonUnmappedMemberHandling(JsonUnmappedMemberHandling.Disallow)]
+
 public class Gameweek
 {
     [JsonPropertyName("code")]

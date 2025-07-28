@@ -1,5 +1,6 @@
-using System.Net;
-using System.Net.Http.Json;
+ using System.Net;
+ using System.Net.Http.Headers;
+ using System.Net.Http.Json;
 using FplClient;
 using Moq;
 using RichardSzalay.MockHttp;
@@ -9,33 +10,36 @@ namespace FplClientTests;
 public class ClientTests
 {
     private readonly Mock<IHttpClientFactory> clientFactory = new();
-
     private readonly MockHttpMessageHandler mockHttp = new();
-
-    //private readonly MockedRequest mockRequest; // = new();
     private readonly Client client;
 
     public ClientTests()
     {
+        var hClient = new HttpClient();
+        //hClient.BaseAddress = new Uri("https://fantasy.premierleague.com/");
+        
         client = new Client(clientFactory.Object);
 
-        mockHttp.When("https://fantasy.premierleague.com/api/gameweeks")
-            .Respond(HttpStatusCode.OK, JsonContent.Create(Things.GameweekResponse));
+        // mockHttp.When("https://fantasy.premierleague.com/api/fixtures")
+        //     .Respond(HttpStatusCode.OK, JsonContent.Create(Things.GameweeksResponse, MediaTypeHeaderValue.Parse("application/json")));
+        
+        //clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(mockHttp.ToHttpClient());
+        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(hClient);
 
-        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(mockHttp.ToHttpClient());
+        //client = new Client(new Httpclient
     }
 
     [Fact]
     public async Task TestGameweeks()
     {
         var actual = await client.Gameweeks(CancellationToken.None);
-        mockHttp.VerifyNoOutstandingExpectation();
+        Assert.NotEmpty(actual);
     }
 }
 
-public class Things
+public static class Things
 {
-    public const string GameweekResponse
+    public const string GameweeksResponse
         = """
           [
             {
@@ -306,275 +310,6 @@ public class Things
               "team_h_difficulty": 3,
               "team_a_difficulty": 3,
               "pulse_id": 115827
-            },
-            {
-              "code": 2444473,
-              "event": 1,
-              "finished": true,
-              "finished_provisional": true,
-              "id": 4,
-              "kickoff_time": "2024-08-17T11:30:00Z",
-              "minutes": 90,
-              "provisional_start_time": false,
-              "started": true,
-              "team_a": 12,
-              "team_a_score": 2,
-              "team_h": 10,
-              "team_h_score": 0,
-              "stats": [
-                {
-                  "identifier": "goals_scored",
-                  "a": [
-                    {
-                      "value": 1,
-                      "element": 317
-                    },
-                    {
-                      "value": 1,
-                      "element": 328
-                    }
-                  ],
-                  "h": []
-                },
-                {
-                  "identifier": "assists",
-                  "a": [
-                    {
-                      "value": 1,
-                      "element": 328
-                    },
-                    {
-                      "value": 1,
-                      "element": 336
-                    }
-                  ],
-                  "h": []
-                },
-                {
-                  "identifier": "own_goals",
-                  "a": [],
-                  "h": []
-                },
-                {
-                  "identifier": "penalties_saved",
-                  "a": [],
-                  "h": []
-                },
-                {
-                  "identifier": "penalties_missed",
-                  "a": [],
-                  "h": []
-                },
-                {
-                  "identifier": "yellow_cards",
-                  "a": [
-                    {
-                      "value": 1,
-                      "element": 321
-                    }
-                  ],
-                  "h": [
-                    {
-                      "value": 1,
-                      "element": 264
-                    },
-                    {
-                      "value": 1,
-                      "element": 274
-                    },
-                    {
-                      "value": 1,
-                      "element": 284
-                    }
-                  ]
-                },
-                {
-                  "identifier": "red_cards",
-                  "a": [],
-                  "h": []
-                },
-                {
-                  "identifier": "saves",
-                  "a": [
-                    {
-                      "value": 2,
-                      "element": 310
-                    }
-                  ],
-                  "h": [
-                    {
-                      "value": 3,
-                      "element": 283
-                    }
-                  ]
-                },
-                {
-                  "identifier": "bonus",
-                  "a": [
-                    {
-                      "value": 3,
-                      "element": 328
-                    },
-                    {
-                      "value": 2,
-                      "element": 311
-                    },
-                    {
-                      "value": 1,
-                      "element": 310
-                    },
-                    {
-                      "value": 1,
-                      "element": 336
-                    }
-                  ],
-                  "h": []
-                },
-                {
-                  "identifier": "bps",
-                  "a": [
-                    {
-                      "value": 38,
-                      "element": 328
-                    },
-                    {
-                      "value": 31,
-                      "element": 311
-                    },
-                    {
-                      "value": 28,
-                      "element": 310
-                    },
-                    {
-                      "value": 28,
-                      "element": 336
-                    },
-                    {
-                      "value": 24,
-                      "element": 317
-                    },
-                    {
-                      "value": 24,
-                      "element": 335
-                    },
-                    {
-                      "value": 24,
-                      "element": 339
-                    },
-                    {
-                      "value": 13,
-                      "element": 327
-                    },
-                    {
-                      "value": 12,
-                      "element": 326
-                    },
-                    {
-                      "value": 7,
-                      "element": 329
-                    },
-                    {
-                      "value": 7,
-                      "element": 333
-                    },
-                    {
-                      "value": 6,
-                      "element": 323
-                    },
-                    {
-                      "value": 3,
-                      "element": 313
-                    },
-                    {
-                      "value": 3,
-                      "element": 337
-                    },
-                    {
-                      "value": -1,
-                      "element": 321
-                    }
-                  ],
-                  "h": [
-                    {
-                      "value": 14,
-                      "element": 278
-                    },
-                    {
-                      "value": 12,
-                      "element": 265
-                    },
-                    {
-                      "value": 12,
-                      "element": 270
-                    },
-                    {
-                      "value": 11,
-                      "element": 274
-                    },
-                    {
-                      "value": 9,
-                      "element": 283
-                    },
-                    {
-                      "value": 8,
-                      "element": 268
-                    },
-                    {
-                      "value": 8,
-                      "element": 277
-                    },
-                    {
-                      "value": 7,
-                      "element": 284
-                    },
-                    {
-                      "value": 3,
-                      "element": 281
-                    },
-                    {
-                      "value": 2,
-                      "element": 260
-                    },
-                    {
-                      "value": 2,
-                      "element": 611
-                    },
-                    {
-                      "value": 1,
-                      "element": 271
-                    },
-                    {
-                      "value": 1,
-                      "element": 282
-                    },
-                    {
-                      "value": -1,
-                      "element": 267
-                    },
-                    {
-                      "value": -2,
-                      "element": 264
-                    },
-                    {
-                      "value": -5,
-                      "element": 275
-                    }
-                  ]
-                },
-                {
-                  "identifier": "mng_underdog_win",
-                  "a": [],
-                  "h": []
-                },
-                {
-                  "identifier": "mng_underdog_draw",
-                  "a": [],
-                  "h": []
-                }
-              ],
-              "team_h_difficulty": 5,
-              "team_a_difficulty": 2,
-              "pulse_id": 115830
             }
           ]
           """;
