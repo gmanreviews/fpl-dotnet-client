@@ -14,6 +14,7 @@ public class ClientTests
     public ClientTests()
     {
         client = new Client(clientFactory.Object);
+        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(mockHttp.ToHttpClient());
     }
 
     [Fact]
@@ -23,8 +24,6 @@ public class ClientTests
       
         mockHttp.When("https://fantasy.premierleague.com/api/fixtures")
           .Respond("application/json", readText);
-        
-        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(mockHttp.ToHttpClient());
         
         var actual = await client.Gameweeks(CancellationToken.None);
         Assert.NotEmpty(actual);
