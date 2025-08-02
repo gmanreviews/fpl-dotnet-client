@@ -25,4 +25,12 @@
       <ProjectReference Include="..\FplClient\FplClient.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestData\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="..\FplClientTests\TestData\fixtures.json" />
+    </ItemGroup>
+
 </Project>
