@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace FplClientModels;
 
 [UsedImplicitly]
-public class Gameweek
+public class Fixture
 {
     [JsonPropertyName("code")]
     public long Code {get; set;}
