@@ -10,6 +10,9 @@ public class Client(IHttpClientFactory clientFactory)
 
     public Task<Fixture[]> GetAllFixtures(int gameweek, CancellationToken cancellationToken) 
         => StreamData<Fixture[]>($"api/fixtures/?event={gameweek}", cancellationToken);
+    
+    public Task<GenericDataSet> GetGenericDataSet(CancellationToken cancellationToken)
+        => StreamData<GenericDataSet>("api/bootstrap-static/", cancellationToken);
 
     private async Task<T> StreamData<T>(string url, CancellationToken cancellationToken)
     {

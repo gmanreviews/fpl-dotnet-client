@@ -4,6 +4,7 @@ using FplClient;
 using FplClientModels;
 using Moq;
 using RichardSzalay.MockHttp;
+using static FplClientTests.EmbeddedData;
 
 namespace FplClientTests;
 
@@ -22,7 +23,7 @@ public class ClientTests
     [Fact]
     public async Task TestGetAllFixtures()
     {
-        var readText = EmbeddedData.ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
       
         mockHttp.When("https://fantasy.premierleague.com/api/fixtures/")
           .Respond("application/json", readText);
@@ -36,7 +37,7 @@ public class ClientTests
     {
         var eventId = new Faker().Random.Int(1, 38);
         
-        var readText = EmbeddedData.ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
         
         var fixtures = JsonSerializer.Deserialize<Fixture[]>(readText) ?? [];
         var limitedFixtures = fixtures.Where(f => f.Event == eventId).ToList();
@@ -48,5 +49,17 @@ public class ClientTests
         
         var actual = await client.GetAllFixtures(eventId, CancellationToken.None);
         Assert.NotEmpty(actual);
+    }
+    
+    [Fact]
+    public async Task TestGetGenericDataSet()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.bootstrap-static.json");
+      
+        mockHttp.When("https://fantasy.premierleague.com/api/bootstrap-static/")
+            .Respond("application/json", readText);
+        
+        var actual = await client.GetGenericDataSet(CancellationToken.None);
+        Assert.NotNull(actual);
     }
 }
