@@ -46,4 +46,6 @@ public class Team
     public int AwayStrengthDef { get; set; }
     [JsonPropertyName("pulse_id")]
     public int PulseId { get; set; }
+    [JsonPropertyName("name")]
+    public required string Name { get; set; }
 }

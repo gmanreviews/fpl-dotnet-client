@@ -12,4 +12,6 @@ public class GenericDataSet
     public required Fixture[] Fixtures {get; set;}
     [JsonPropertyName("teams")]
     public required Team[] Teams {get; set;}
+    [JsonPropertyName("elements")]
+    public required Element[] Elements {get; set;}
 }
