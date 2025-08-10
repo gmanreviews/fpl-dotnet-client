@@ -6,15 +6,15 @@ namespace FplClient;
 public class Client(IHttpClientFactory clientFactory)
 {
     public Task<Fixture[]> GetAllFixtures(CancellationToken cancellationToken) 
-        => StreamData<Fixture[]>("api/fixtures/", cancellationToken);
+        => GetData<Fixture[]>("api/fixtures/", cancellationToken);
 
     public Task<Fixture[]> GetAllFixtures(int gameweek, CancellationToken cancellationToken) 
-        => StreamData<Fixture[]>($"api/fixtures/?event={gameweek}", cancellationToken);
+        => GetData<Fixture[]>($"api/fixtures/?event={gameweek}", cancellationToken);
     
     public Task<GenericDataSet> GetGenericDataSet(CancellationToken cancellationToken)
-        => StreamData<GenericDataSet>("api/bootstrap-static/", cancellationToken);
+        => GetData<GenericDataSet>("api/bootstrap-static/", cancellationToken);
 
-    private async Task<T> StreamData<T>(string url, CancellationToken cancellationToken)
+    private async Task<T> GetData<T>(string url, CancellationToken cancellationToken)
     {
         using var client = ConfigureClient();
         var response = await client.GetAsync(url ,cancellationToken);
