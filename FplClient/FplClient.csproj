@@ -6,7 +6,6 @@
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <PackageId>FplDotNetCoreClient</PackageId>
-        <Version>0.1.1</Version>
         <Authors>Andrew Robinson</Authors>
     </PropertyGroup>
 
