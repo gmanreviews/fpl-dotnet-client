@@ -21,9 +21,9 @@ jobs:
       run: dotnet test -c Release --no-build
     - name: Pack nugets
       run: dotnet pack FplClientModels -c Release --no-build --output .
-    - name: Push to NuGet
-      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_API_KEY_FPLCLIENTMODELS}} --source https://api.nuget.org/v3/index.json
+    - name: Push FplClientModels to NuGet
+      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_API_KEY_FPLCLIENTMODELS}} --source https://api.nuget.org/v3/index.json --skip-duplicate
     - name: Pack nugets
-      run: dotnet pack FplClient -c Release --no-build --output .
-    - name: Push to NuGet
-      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_API_KEY_FPLCLIENT}} --source https://api.nuget.org/v3/index.json
+      run: dotnet pack FplClient -IncludeReferencedProjects -c Release --no-build --output .
+    - name: Push FplClient to NuGet
+      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_API_KEY_FPLCLIENT}} --source https://api.nuget.org/v3/index.json --skip-duplicate
