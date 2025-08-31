@@ -5,6 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <PackageId>FplDotNetCoreClient</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>Andrew Robinson</Authors>
     </PropertyGroup>
 
     <ItemGroup>
