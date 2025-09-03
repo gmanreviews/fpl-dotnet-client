@@ -67,4 +67,17 @@ public class ClientTests
         var actual = await client.GetGenericDataSet(CancellationToken.None);
         Assert.NotNull(actual);
     }
+    
+    [Fact]
+    public async Task TestPlayerDetails()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.element-summary.json");
+        var playerId = faker.Random.Int(1, 38);
+        
+        mockHttp.When($"{baseUrl}/api/element-summary/{playerId}/")
+            .Respond("application/json", readText);
+        
+        var actual = await client.GetPlayerDetails(playerId, CancellationToken.None);
+        Assert.NotNull(actual);
+    }
 }

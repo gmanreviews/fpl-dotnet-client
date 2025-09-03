@@ -14,6 +14,9 @@ public class Client(IHttpClientFactory clientFactory)
     public Task<GenericDataSet> GetGenericDataSet(CancellationToken cancellationToken)
         => GetData<GenericDataSet>("api/bootstrap-static/", cancellationToken);
     
+    public Task<ElementSummary> GetPlayerDetails(long playerId, CancellationToken cancellationToken)
+        => GetData<ElementSummary>($"api/element-summary/{playerId}/", cancellationToken);
+
     private async Task<T> GetData<T>(string url, CancellationToken cancellationToken)
     {
         using var client = clientFactory.CreateClient("FplClient");
