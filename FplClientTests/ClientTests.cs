@@ -13,11 +13,16 @@ public class ClientTests
     private readonly Mock<IHttpClientFactory> clientFactory = new();
     private readonly MockHttpMessageHandler mockHttp = new();
     private readonly Client client;
+    private readonly string baseUrl;
+    private readonly Faker faker = new ();
 
     public ClientTests()
     {
+        baseUrl = faker.Internet.Url();
         client = new Client(clientFactory.Object);
-        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(mockHttp.ToHttpClient());
+        var httpClient = mockHttp.ToHttpClient();
+        httpClient.BaseAddress = new Uri(baseUrl);
+        clientFactory.Setup(c => c.CreateClient(It.IsAny<string>())).Returns(httpClient);
     }
 
     [Fact]
@@ -25,7 +30,7 @@ public class ClientTests
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
       
-        mockHttp.When("https://fantasy.premierleague.com/api/fixtures/")
+        mockHttp.When($"{baseUrl}/api/fixtures/")
           .Respond("application/json", readText);
         
         var actual = await client.GetAllFixtures(CancellationToken.None);
@@ -35,7 +40,7 @@ public class ClientTests
     [Fact]
     public async Task TestGetAllFixturesWithGameweek()
     {
-        var eventId = new Faker().Random.Int(1, 38);
+        var eventId = faker.Random.Int(1, 38);
         
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
         
@@ -44,7 +49,7 @@ public class ClientTests
         var textFixtures = JsonSerializer.Serialize(limitedFixtures);
         
         
-        mockHttp.When($"https://fantasy.premierleague.com/api/fixtures/?event={eventId}")
+        mockHttp.When($"{baseUrl}/api/fixtures/?event={eventId}")
             .Respond("application/json", textFixtures);
         
         var actual = await client.GetAllFixtures(eventId, CancellationToken.None);
@@ -56,7 +61,7 @@ public class ClientTests
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.bootstrap-static.json");
       
-        mockHttp.When("https://fantasy.premierleague.com/api/bootstrap-static/")
+        mockHttp.When($"{baseUrl}/api/bootstrap-static/")
             .Respond("application/json", readText);
         
         var actual = await client.GetGenericDataSet(CancellationToken.None);
