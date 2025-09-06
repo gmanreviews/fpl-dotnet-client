@@ -7,8 +7,9 @@ namespace FplClientModels;
 public class ElementSummary
 {
     [JsonPropertyName("fixtures")] 
-    public Fixture[] Fixtures { get; set; } = [];
+    public Fixture[] FutureFixtures { get; set; } = [];
     [JsonPropertyName("history")] 
-    public ElementHistory[] History { get; set; } = [];
-    
+    public PlayerFixtureDetails[] History { get; set; } = [];
+    [JsonPropertyName("history_past")]
+    public PlayerSeasonDetails[] HistoryPast { get; set; } = [];
 }

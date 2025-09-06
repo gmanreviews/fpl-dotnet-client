@@ -13,5 +13,5 @@ public class GenericDataSet
     [JsonPropertyName("teams")]
     public required Team[] Teams {get; set;}
     [JsonPropertyName("elements")]
-    public required Element[] Elements {get; set;}
+    public required PlayerDetails[] Players {get; set;}
 }

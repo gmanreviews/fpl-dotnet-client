@@ -1,10 +1,8 @@
 using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 
 namespace FplClientModels;
 
-[UsedImplicitly]
-public class ElementHistory
+public abstract class PlayerStatsDetails
 {
     [JsonPropertyName("assists")]
     public required int Assists { get; set; }
@@ -20,8 +18,6 @@ public class ElementHistory
     public string? Creativity { get; set; }
     [JsonPropertyName("defensive_contribution")]
     public int DefensiveContribution { get; set; }
-    [JsonPropertyName("element")]
-    public int Element { get; set; }
     [JsonPropertyName("expected_assists")]
     public string? ExpectedAssists { get; set; }
     [JsonPropertyName("expected_goals")]
@@ -30,8 +26,6 @@ public class ElementHistory
     public string? ExpectedGoalsConceded { get; set; }
     [JsonPropertyName("expected_goal_involvements")]
     public string? ExpectedGoalsInvolvements { get; set; }
-    [JsonPropertyName("fixture")]
-    public int Fixture { get; set; }
     [JsonPropertyName("goals_conceded")]
     public int GoalsConceded { get; set; }
     [JsonPropertyName("goals_scored")]
@@ -40,8 +34,6 @@ public class ElementHistory
     public string? IctIndex { get; set; }
     [JsonPropertyName("influence")]
     public string? Influence { get; set; }
-    [JsonPropertyName("kickoff_time")]
-    public string? KickoffTime { get; set; }
     [JsonPropertyName("minutes")]
     public int Minutes { get; set; }
     [JsonPropertyName("modified")]
@@ -58,34 +50,16 @@ public class ElementHistory
     public int Recoveries { get; set; }
     [JsonPropertyName("red_cards")]
     public int RedCards { get; set; }
-    [JsonPropertyName("round")]
-    public int Round { get; set; }
     [JsonPropertyName("saves")]
     public int Saves { get; set; }
-    [JsonPropertyName("selected")]
-    public int Selected { get; set; }
     [JsonPropertyName("starts")]
     public int Starts { get; set; }
     [JsonPropertyName("tackles")]
     public int Tackles { get; set; }
-    [JsonPropertyName("team_a_score")]
-    public int AwayScore { get; set; }
-    [JsonPropertyName("team_h_score")]
-    public int HomeScore { get; set; }
     [JsonPropertyName("threat")]
     public string? Threat { get; set; }
     [JsonPropertyName("total_points")]
     public int TotalPoints { get; set; }
-    [JsonPropertyName("transfers_balance")]
-    public int TransfersBalance { get; set; }
-    [JsonPropertyName("transfers_in")]
-    public int TransfersIn { get; set; }
-    [JsonPropertyName("transfers_out")]
-    public int TransfersOut { get; set; }
-    [JsonPropertyName("value")]
-    public int Value { get; set; }
-    [JsonPropertyName("was_home")]
-    public bool? WasHome { get; set; }
     [JsonPropertyName("yellow_cards")]
     public int YellowCards { get; set; }
 }
