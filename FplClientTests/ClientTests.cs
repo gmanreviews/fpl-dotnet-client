@@ -80,4 +80,17 @@ public class ClientTests
         var actual = await client.GetPlayerDetails(playerId, CancellationToken.None);
         Assert.NotNull(actual);
     }
+    
+    [Fact]
+    public async Task TestGetPlayerStatsForGameWeek()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.event-live.json");
+        var gameweek = faker.Random.Int(1, 38);
+        
+        mockHttp.When($"{baseUrl}/api/event/{gameweek}/live")
+            .Respond("application/json", readText);
+        
+        var actual = await client.GetPlayerStatsForGameWeek(gameweek, CancellationToken.None);
+        Assert.NotNull(actual);
+    }
 }

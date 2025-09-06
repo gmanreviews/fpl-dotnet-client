@@ -35,6 +35,7 @@
         <EmbeddedResource Include="..\FplClientTests\TestData\fixtures.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\bootstrap-static.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\element-summary.json" />
+        <EmbeddedResource Include="..\FplClientTests\TestData\event-live.json" />
     </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ namespace FplClientModels;
 public abstract class PlayerStatsDetails
 {
     [JsonPropertyName("assists")]
-    public required int Assists { get; set; }
+    public int? Assists { get; set; }
     [JsonPropertyName("bonus")]
     public int Bonus { get; set; }
     [JsonPropertyName("bps")]
