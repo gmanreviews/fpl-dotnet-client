@@ -18,7 +18,7 @@ jobs:
     - name: Build
       run: dotnet build FplClient -c Release
     - name: Test
-      run: dotnet test -c Release --no-build
+      run: dotnet test -c Release --no-build --filter Category!=Integration
     - name: Pack Models nugets
       run: dotnet pack FplClientModels -c Release --no-build --output models
     - name: Push FplClientModels to NuGet

@@ -28,10 +28,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TestData\" />
-    </ItemGroup>
-
-    <ItemGroup>
         <EmbeddedResource Include="..\FplClientTests\TestData\fixtures.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\bootstrap-static.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\element-summary.json" />
