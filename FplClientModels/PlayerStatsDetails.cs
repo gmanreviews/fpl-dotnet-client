@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace FplClientModels;
 
 public abstract class PlayerStatsDetails

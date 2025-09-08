@@ -1,6 +1,3 @@
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-
 namespace FplClientModels;
 
 [UsedImplicitly]

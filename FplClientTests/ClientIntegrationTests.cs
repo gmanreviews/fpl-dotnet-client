@@ -18,13 +18,6 @@ public class ClientIntegrationTests: ClientTests
     
     protected override Client Client { get; }
     
-    [Fact]
-    public override async Task TestGetAllFixtures()
-    {
-        await base.TestGetAllFixtures();
-    }
-    
-    [Fact]
     public override async Task TestGetAllFixturesWithGameweek()
     {
         var eventId = Faker.Random.Int(1, 38);
@@ -32,13 +25,6 @@ public class ClientIntegrationTests: ClientTests
         await TestGetAllFixturesWithGameweekWithEventId(eventId);
     }
     
-    [Fact]
-    public override async Task TestGetGenericDataSet()
-    {
-        await base.TestGetGenericDataSet();
-    }
-    
-    [Fact]
     public override async Task TestPlayerDetails()
     {
         var playerId = Faker.Random.Int(1, 38);
@@ -46,11 +32,16 @@ public class ClientIntegrationTests: ClientTests
         await  TestPlayerDetailsWithPlayerId(playerId);
     }
     
-    [Fact]
     public override async Task TestGetPlayerStatsForGameWeek()
     {
         var gameweek = Faker.Random.Int(1, 38);
         
         await TestGetPlayerStatsForGameWeekWithGameweek(gameweek);
+    }
+    
+    public override async Task TestGetManagerSummary()
+    {
+        var managerId = Faker.Random.Int(1, 38);
+        await TestGetManagerSummaryWithGameweek(managerId);
     }
 }

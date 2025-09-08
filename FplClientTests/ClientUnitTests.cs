@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Bogus;
 using FplClient;
 using FplClientModels;
 using Moq;
@@ -26,7 +25,6 @@ public class ClientUnitTests: ClientTests
 
     protected override Client Client { get; }
 
-    [Fact]
     public override async Task TestGetAllFixtures()
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.fixtures.json");
@@ -37,7 +35,6 @@ public class ClientUnitTests: ClientTests
         await base.TestGetAllFixtures();
     }
     
-    [Fact]
     public override async Task TestGetAllFixturesWithGameweek()
     {
         var eventId = Faker.Random.Int(1, 38);
@@ -55,7 +52,6 @@ public class ClientUnitTests: ClientTests
         await TestGetAllFixturesWithGameweekWithEventId(eventId);
     }
     
-    [Fact]
     public override async Task TestGetGenericDataSet()
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.bootstrap-static.json");
@@ -66,7 +62,6 @@ public class ClientUnitTests: ClientTests
         await base.TestGetGenericDataSet();
     }
     
-    [Fact]
     public override async Task TestPlayerDetails()
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.element-summary.json");
@@ -78,7 +73,6 @@ public class ClientUnitTests: ClientTests
         await  TestPlayerDetailsWithPlayerId(playerId);
     }
     
-    [Fact]
     public override async Task TestGetPlayerStatsForGameWeek()
     {
         var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.event-live.json");
@@ -88,5 +82,16 @@ public class ClientUnitTests: ClientTests
             .Respond("application/json", readText);
         
         await TestGetPlayerStatsForGameWeekWithGameweek(gameweek);
+    }
+
+    public override async Task TestGetManagerSummary()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.manager.json");
+        var managerId = Faker.Random.Int(1, 38);
+        
+        mockHttp.When($"{baseUrl}/api/entry/{managerId}/")
+            .Respond("application/json", readText);
+        
+        await TestGetManagerSummaryWithGameweek(managerId);
     }
 }

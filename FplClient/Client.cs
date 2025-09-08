@@ -20,6 +20,9 @@ public class Client(IHttpClientFactory clientFactory)
     
     public Task<FixturePlayerStatsWrapper> GetPlayerStatsForGameWeek(int gameweek, CancellationToken cancellationToken)
         => GetData<FixturePlayerStatsWrapper>($"/api/event/{gameweek}/live", cancellationToken);
+    
+    public Task<Manager> GetManagerSummary(int managerId, CancellationToken cancellationToken)
+        => GetData<Manager>($"api/entry/{managerId}/", cancellationToken);
 
     private async Task<T> GetData<T>(string url, CancellationToken cancellationToken)
     {
