@@ -33,6 +33,7 @@
         <EmbeddedResource Include="..\FplClientTests\TestData\element-summary.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\event-live.json" />
         <EmbeddedResource Include="..\FplClientTests\TestData\manager.json" />
+        <EmbeddedResource Include="..\FplClientTests\TestData\manager-history.json" />
     </ItemGroup>
 
 </Project>

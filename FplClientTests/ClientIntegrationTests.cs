@@ -42,6 +42,12 @@ public class ClientIntegrationTests: ClientTests
     public override async Task TestGetManagerSummary()
     {
         var managerId = Faker.Random.Int(1, 38);
-        await TestGetManagerSummaryWithGameweek(managerId);
+        await TestGetManagerSummaryWithManager(managerId);
+    }
+    
+    public override async Task TestGetManagerHistory()
+    {
+        var managerId = Faker.Random.Int(1, 38);
+        await TestGetManagerHistoryWithManager(managerId);
     }
 }

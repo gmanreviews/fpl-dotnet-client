@@ -52,9 +52,18 @@ public abstract class ClientTests
     [Fact]
     public abstract Task TestGetManagerSummary();
     
-    protected async Task TestGetManagerSummaryWithGameweek(int managerId)
+    protected async Task TestGetManagerSummaryWithManager(int managerId)
     {
         var actual = await Client.GetManagerSummary(managerId, CancellationToken.None);
+        Assert.NotNull(actual);
+    }
+    
+    [Fact]
+    public abstract Task TestGetManagerHistory();
+    
+    protected async Task TestGetManagerHistoryWithManager(int managerId)
+    {
+        var actual = await Client.GetManagerHistory(managerId, CancellationToken.None);
         Assert.NotNull(actual);
     }
 }

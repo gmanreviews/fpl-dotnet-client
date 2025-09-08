@@ -92,6 +92,17 @@ public class ClientUnitTests: ClientTests
         mockHttp.When($"{baseUrl}/api/entry/{managerId}/")
             .Respond("application/json", readText);
         
-        await TestGetManagerSummaryWithGameweek(managerId);
+        await TestGetManagerSummaryWithManager(managerId);
+    }
+    
+    public override async Task TestGetManagerHistory()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.manager-history.json");
+        var managerId = Faker.Random.Int(1, 38);
+        
+        mockHttp.When($"{baseUrl}/api/entry/{managerId}/history/")
+            .Respond("application/json", readText);
+        
+        await TestGetManagerHistoryWithManager(managerId);
     }
 }
