@@ -66,4 +66,13 @@ public abstract class ClientTests
         var actual = await Client.GetManagerHistory(managerId, CancellationToken.None);
         Assert.NotNull(actual);
     }
+    
+    [Fact]
+    public abstract Task TestGetManagerTransfers();
+    
+    protected async Task TestGetManagerTransfersWithManager(int managerId)
+    {
+        var actual = await Client.GetManagerTransfers(managerId, CancellationToken.None);
+        Assert.NotNull(actual);
+    }
 }

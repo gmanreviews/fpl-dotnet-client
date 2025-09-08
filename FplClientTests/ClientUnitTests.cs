@@ -105,4 +105,15 @@ public class ClientUnitTests: ClientTests
         
         await TestGetManagerHistoryWithManager(managerId);
     }
+    
+    public override async Task TestGetManagerTransfers()
+    {
+        var readText = ReadEmbeddedData<ClientTests>("FplClientTests.TestData.transfers.json");
+        var managerId = Faker.Random.Int(1, 38);
+        
+        mockHttp.When($"{baseUrl}/api/entry/{managerId}/transfers/")
+            .Respond("application/json", readText);
+        
+        await TestGetManagerTransfersWithManager(managerId);
+    }
 }

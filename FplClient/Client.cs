@@ -26,6 +26,9 @@ public class Client(IHttpClientFactory clientFactory)
     
     public Task<ManagerStats> GetManagerHistory(int managerId, CancellationToken cancellationToken)
         => GetData<ManagerStats>($"api/entry/{managerId}/history/", cancellationToken);
+    
+    public Task<Transfer[]> GetManagerTransfers(int managerId, CancellationToken cancellationToken)
+        => GetData<Transfer[]>($"api/entry/{managerId}/transfers/", cancellationToken);
 
     private async Task<T> GetData<T>(string url, CancellationToken cancellationToken)
     {

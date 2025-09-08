@@ -50,4 +50,11 @@ public class ClientIntegrationTests: ClientTests
         var managerId = Faker.Random.Int(1, 38);
         await TestGetManagerHistoryWithManager(managerId);
     }
+
+
+    public override async Task TestGetManagerTransfers()
+    {
+        var managerId = Faker.Random.Int(1, 38);
+        await TestGetManagerTransfersWithManager(managerId);
+    }
 }
