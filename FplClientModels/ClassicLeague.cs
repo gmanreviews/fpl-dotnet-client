@@ -10,7 +10,7 @@ public class ClassicLeague
     [JsonPropertyName("created")]
     public string? Created { get; set; }
     [JsonPropertyName("cup_league")]
-    public bool? CupLeague { get; set; }
+    public int? CupLeague { get; set; }
     [JsonPropertyName("cup_qualified")]
     public bool? CupQualified { get; set; }
     [JsonPropertyName("entry_can_admin")]
