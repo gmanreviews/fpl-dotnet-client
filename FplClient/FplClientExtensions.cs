@@ -12,6 +12,7 @@ public static class FplClientExtensions
             httpClient.BaseAddress = new Uri("https://fantasy.premierleague.com/");
         });
         services.AddScoped<Client>(s => new Client(s.GetRequiredService<IHttpClientFactory>()));
+        services.AddScoped<Authentication>();
         return services;
     }
 }
