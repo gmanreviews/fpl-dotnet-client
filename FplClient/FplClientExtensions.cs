@@ -5,7 +5,7 @@ namespace FplClient;
 
 public static class FplClientExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static void AddServices(this IServiceCollection services)
     {
         services.AddHttpClient(FplClientName, httpClient =>
         {
@@ -13,6 +13,5 @@ public static class FplClientExtensions
         });
         services.AddScoped<Client>(s => new Client(s.GetRequiredService<IHttpClientFactory>()));
         services.AddScoped<Authentication>();
-        return services;
     }
 }
