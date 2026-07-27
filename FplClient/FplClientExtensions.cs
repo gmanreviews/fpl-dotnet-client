@@ -5,13 +5,16 @@ namespace FplClient;
 
 public static class FplClientExtensions
 {
-    public static void AddServices(this IServiceCollection services)
+    extension(IServiceCollection services)
     {
-        services.AddHttpClient(FplClientName, httpClient =>
+        public void AddServices()
         {
-            httpClient.BaseAddress = new Uri("https://fantasy.premierleague.com/");
-        });
-        services.AddScoped<Client>(s => new Client(s.GetRequiredService<IHttpClientFactory>()));
-        services.AddScoped<Authentication>();
+            services.AddHttpClient(FplClientName, httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("https://fantasy.premierleague.com/");
+            });
+            services.AddScoped<Client>(s => new Client(s.GetRequiredService<IHttpClientFactory>()));
+            services.AddScoped<Authentication>();
+        }
     }
 }
