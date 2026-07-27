@@ -22,7 +22,7 @@ public class Team
     [JsonPropertyName("short_name")]
     public required string ShortName { get; set; }
     [JsonPropertyName("strength")]
-    public int Strength { get; set; }
+    public int? Strength { get; set; }
     [JsonPropertyName("team_division")]
     public string? TeamDivision { get; set; }
     [JsonPropertyName("unavailable")]

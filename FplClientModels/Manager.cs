@@ -16,11 +16,11 @@ public class Manager
     [JsonPropertyName("kit")]
     public string? Kit { get; set; }
     [JsonPropertyName("last_deadline_bank")]
-    public int LastDeadlineBank { get; set; }
+    public int? LastDeadlineBank { get; set; }
     [JsonPropertyName("last_deadline_total_transfers")]
-    public int LastDeadlineTotalTransfers { get; set; }
+    public int? LastDeadlineTotalTransfers { get; set; }
     [JsonPropertyName("last_deadline_value")]
-    public int LastDeadlineValue { get; set; }
+    public int? LastDeadlineValue { get; set; }
     [JsonPropertyName("leagues")] 
     public Leagues Leagues { get; set; } = new();
     [JsonPropertyName("name")]
@@ -42,13 +42,13 @@ public class Manager
     [JsonPropertyName("started_event")]
     public int StartedEvent { get; set; }
     [JsonPropertyName("summary_event_points")]
-    public int SummaryEventPoints { get; set; }
+    public int? SummaryEventPoints { get; set; }
     [JsonPropertyName("summary_event_rank")]
-    public int SummaryEventRank { get; set; }
+    public int? SummaryEventRank { get; set; }
     [JsonPropertyName("summary_overall_points")]
-    public int SummaryOverallPoints { get; set; }
+    public int? SummaryOverallPoints { get; set; }
     [JsonPropertyName("summary_overall_rank")]
-    public int SummaryOverallRank { get; set; }
+    public int? SummaryOverallRank { get; set; }
     [JsonPropertyName("years_active")]
     public int YearsActive { get; set; }
 }
