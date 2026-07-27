@@ -10,11 +10,11 @@ jobs:
     timeout-minutes: 5
     steps:
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6 
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     - name: Build
       run: dotnet build FplClient -c Release
     - name: Test
